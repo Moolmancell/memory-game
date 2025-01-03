@@ -27,7 +27,8 @@ async function loadPokemon() {
     const data = await response.json();
     return {
       id: data.id,
-      url: data.sprites.other.dream_world.front_default, 
+      url: data.sprites.other.dream_world.front_default,
+      name: data.name 
     };
   } catch (error) {
     console.log(error);
@@ -68,7 +69,7 @@ function App() {
           <button key={item.id} onClick={() => {
             setArr(shuffle(arr))
           }}>
-            <img src={item.url} alt="pokemon" />
+            <img src={item.url} alt={item.name} />
           </button>
         ))}
     </div>
