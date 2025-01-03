@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 function randomized(min, max) { 
   return Math.floor(Math.random() * (max - min + 1) + min)
@@ -38,17 +38,25 @@ async function loadPokemon() {
 function App() {
   const [isAssetLoaded, setAssetLoaded] = useState(false);
   const [arr, setArr] = useState([]);
+  const hasFetched = useRef(false);
+
+  console.log(arr)
 
   useEffect(() => {
+    
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
     async function fetchPokemons() {
+      console.log("ftechin")
       let array = [];
       let fetchedIds = new Set();
-
+  
       while (array.length < 10) {
         const pokemon = await loadPokemon();
 
         if (pokemon && !fetchedIds.has(pokemon.id)) {
-          fetchedIds.add(pokemon.id); // Mark ID as fetched
+          fetchedIds.add(pokemon.id);
           array.push(pokemon);
         }
       }
@@ -70,6 +78,7 @@ function App() {
             setArr(shuffle(arr))
           }}>
             <img src={item.url} alt={item.name} />
+            <h1>{item.name}</h1>
           </button>
         ))}
     </div>
