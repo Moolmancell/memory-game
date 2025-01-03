@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import './Card.css'
+import './Pokeball.css'
 
 const typeColor = {
   bug: "#26de81",
@@ -120,7 +121,7 @@ function App() {
       <h1>Memory Game</h1>
       <h2>Score: {score}</h2>
       <h2>Best Score: {bestScore}</h2>
-      {!isAssetLoaded && <p>Loading...</p>}
+      {!isAssetLoaded && <div class="pokeball"></div>}
       <div className='container'>
       {isAssetLoaded &&
         arr.map((item) => (
